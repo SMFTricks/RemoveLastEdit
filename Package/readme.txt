@@ -1,1 +1,0 @@
-This package will install the Remove Topic Views modification.
