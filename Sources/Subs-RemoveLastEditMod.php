@@ -11,6 +11,12 @@
 // The actions. That needs to be done first.
 function rlem_actions(&$actionArray)
 {
+	global $modSettings;
+
+	// Is the last edit message enabled?
+	if (empty($modSettings['show_modify']))
+		return;
+
 		// Our main action, on which everything will be based.
 		$actionArray['unsetedittime'] = array('Subs-RemoveLastEditMod.php', 'rlem');
 }
@@ -18,77 +24,91 @@ function rlem_actions(&$actionArray)
 // The permissions, allowing people to remove either their own or others' edit sign.
 function rlem_permissions(&$permissionGroups, &$permissionList)
 {
-		// Permission groups.
-		$permissionGroups['membergroup']['simple'] = array('rlem_simple');
-		$permissionGroups['membergroup']['classic'] = array('rlem_classic');
+	global $modSettings;
 
-		// A list.
-		$permissions = array(
-				'rlem_do_own',
-				'rlem_do_any',
-		);
+	// Hide the permissions if it's disabled.
+	if (empty($modSettings['show_modify']))
+		return;
 
-		// Add them.
-		foreach ($permissions as $perm)
-				$permissionList['membergroup'][$perm] = array(false, 'rlem_classic', 'rlem_simple');
+	// Add the language
+	loadLanguage('RemoveLastEdit/');
+
+	// Permission groups.
+	$permissionGroups['membergroup']['simple'] = array('rlem_simple');
+	$permissionGroups['membergroup']['classic'] = array('rlem_classic');
+
+	// A list.
+	$permissions = array(
+		'rlem_do_own',
+		'rlem_do_any',
+	);
+
+	// Add them.
+	foreach ($permissions as $perm)
+		$permissionList['membergroup'][$perm] = array(false, 'rlem_classic', 'rlem_simple');
 }
 
 // Just positions as a bridge between rlem_do and the topic view. Nothing more really.
 function rlem()
 {
-		// Check if everything is set.
-		if (empty($_REQUEST['post']))
-			fatal_lang_error('remove_last_edited_error_3');
+	loadLanguage('RemoveLastEdit/');
 
-		// Yeah everything's set... Now do your trick.
-		rlem_do((int) $_REQUEST['post']);
+	// Check if everything is set.
+	if (empty($_REQUEST['msg']) || !isset($_REQUEST['msg']))
+		fatal_lang_error('remove_last_edited_error_3', false);
+
+	// Yeah everything's set... Now do your trick.
+	rlem_do((int) $_REQUEST['msg']);
 }
 
 // The main function which does all the work.
 // @param int $postid The ID of the post where the notice needs to be removed.
-function rlem_do($postid)
+function rlem_do(int $postid)
 {
-		global $smcFunc, $scripturl, $context, $txt;
+	global $smcFunc, $scripturl, $user_info;
 
-		// Okay, check if all required parameters are filled.
-		if (!empty($postid) && !is_numeric($postid))
-				fatal_lang_error('remove_last_edited_error_1');
+	// Need either permission...
+	if (!allowedTo('rlem_do_any') && !allowedTo('rlem_do_own'))
+		fatal_lang_error('remove_last_edited_error_2', false);
 
-		// Check if the post is valid, an ID is what it says it is, unique.
-		$result = $smcFunc['db_query']('', "
-				SELECT id_msg, id_topic, id_member
-				FROM {db_prefix}messages
-				WHERE id_msg= {int:msgid}",
-				array(
-						'msgid' => $postid,
-				)
-		);
+	// This empties out the parts with which SMF determines if the post was modified, thus tricking it into believing it's not modified at all.
+	$smcFunc['db_query']('', '
+		UPDATE {db_prefix}messages
+		SET
+			modified_time = {int:modified_time},
+			modified_name = {string:modified_name}
+		WHERE id_msg = {int:msgid}' . (allowedTo('rlem_do_own') && !allowedTo('rlem_do_any') ? '
+			AND id_member = {int:userid}' : ''),
+		array(
+			'modified_time' => 0,
+			'modified_name' => '',
+			'msgid' => $postid,
+			'userid' => $user_info['id'],
+		)
+	);
 
-		// Does it exist?
-		if ($smcFunc['db_num_rows']($result) == 0)
-				fatal_lang_error('remove_last_edited_error_1');
+	// And we're done!
+	redirectexit($scripturl . '?msg=' . $postid);
+}
 
-		// Grab the title from the result.
-		$post = $smcFunc['db_fetch_assoc']($result);
+/**
+ * Adds the "remove sign" button if they have enough permissions.
+ * 
+ * @param array $output The post output
+ * @return void
+ */
+function rlem_display_context(&$output, $message)
+{
+	global $user_info, $scripturl, $txt;
 
-		// Are we allowed to do our own post, though? If we get past here we're safe.
-		if (allowedTo('rlem_do_any') || (allowedTo('rlem_do_own') && $context['user']['id'] == $post['id_member']))
-		{
-				// This empties out the parts with which SMF determines if the post was modified, thus tricking it into believing it's not modified at all.
-				$smcFunc['db_query']('', "
-						UPDATE {db_prefix}messages
-						SET
-								modified_time = 0,
-								modified_name = ''
-						WHERE id_msg = {int:msgid}",
-						array(
-								'msgid' => $postid,
-						)
-				);
+	// Check if there's anything to do here
+	if (!allowedTo('rlem_do_any') && !allowedTo('rlem_do_own') || $message['id_member'] != $user_info['id'] && !allowedTo('rlem_do_any'))
+		return;
 
-				// And we're done!
-				redirectexit($scripturl . '?topic=' . $post['id_topic'] . '.msg' . $post['id_msg'] . '#msg' . $post['id_msg']);
-		}
-		else
-				fatal_lang_error('remove_last_edited_error_2');
+	// Load the language for the actual message...
+	loadLanguage('RemoveLastEdit/');
+
+	// Add the link, if possible...
+	if (isset($output['modified']['last_edit_text']) && !empty($output['modified']['last_edit_text']))
+		$output['modified']['last_edit_text'] .= ' - <a href="' . $scripturl . '?action=unsetedittime;msg=' . $message['id_msg'] . '">' . $txt['remove_edit_sign'] . '</a>';
 }
