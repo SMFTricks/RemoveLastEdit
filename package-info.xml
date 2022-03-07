@@ -15,6 +15,8 @@
 			License, v. 3.0. If a copy of the GPL was not distributed with this
 			file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html.
 		</license>
+		<!-- Theme Files -->
+		<require-dir name="Languages/RemoveLastEdit" destination="$languagedir">Language files</require-dir>
 		<!-- Source File -->
 		<require-file name="Sources/Subs-RemoveLastEditMod.php" destination="$sourcedir" />
 		<!-- Hooks -->
