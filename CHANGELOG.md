@@ -4,15 +4,15 @@
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Hooks only.
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Small code improvements.
 - ![New Feature](https://smftricks.com/assets/changelog/tag--plus.png) Support for SMF 2.1.0.
-- ![Translation](https://www.simplemachines.org/site_images/lang/french.gif) French translation provided by [alexetgus](https://www.simplemachines.org/community/index.php?action=profile;u=363570)
+- ![Translation](https://smftricks.com/assets/changelog/language.png) French translation provided by [alexetgus](https://www.simplemachines.org/community/index.php?action=profile;u=363570)
 ---
 #### 0.2.5 - 20 December 2012
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Minor improvements and code optimization.
 
 #### 0.2.4 - 15 October 2012
-- ![Translation](https://www.simplemachines.org/site_images/lang/croatian.gif) Croatian translation provided by [Branko.](https://www.simplemachines.org/community/index.php?action=profile;u=95212)
-- ![Translation](https://www.simplemachines.org/site_images/lang/serbian.gif) Serbian translation provided by [Branko.](https://www.simplemachines.org/community/index.php?action=profile;u=95212)
-- ![Translation](https://www.simplemachines.org/site_images/lang/dutch.gif) Dutch translation provided by [NanoSector](https://www.simplemachines.org/community/index.php?action=profile;u=251953)
+- ![Translation](https://smftricks.com/assets/changelog/language.png) Croatian translation provided by [Branko.](https://www.simplemachines.org/community/index.php?action=profile;u=95212)
+- ![Translation](https://smftricks.com/assets/changelog/language.png) Serbian translation provided by [Branko.](https://www.simplemachines.org/community/index.php?action=profile;u=95212)
+- ![Translation](https://smftricks.com/assets/changelog/language.png) Dutch translation provided by [NanoSector](https://www.simplemachines.org/community/index.php?action=profile;u=251953)
 
 #### 0.2.3 - 26 August 2012
 - ![Bug Fix](https://smftricks.com/assets/changelog/bug--minus.png) Fixed more issues with permissions.
