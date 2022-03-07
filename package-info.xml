@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
-<!--Generated with Mod Manager (c) 2013 Yoshi2889-->
-<package-info xmlns:smf="http://www.simplemachines.org/" xmlns="http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<id>Yoshi2889:RemoveLastEditMod</id>
 	<name>Remove "Last Edit"</name>
 	<version>1.0</version>
 	<type>modification</type>
-	<install for="2.1.0 - 2.1.99">
+	<install for="2.1 - 2.1.99">
 		<!-- Mod Readme -->
 		<readme lang="english" parsebbc="true" type="file">readme/readme.english.txt</readme>
 		<!-- License -->
@@ -16,7 +15,7 @@
 			file, You can obtain one at https://www.gnu.org/licenses/gpl-3.0.en.html.
 		</license>
 		<!-- Theme Files -->
-		<require-dir name="Languages/RemoveLastEdit" destination="$languagedir">Language files</require-dir>
+		<require-dir name="Language/RemoveLastEdit" destination="$languagedir">Language files</require-dir>
 		<!-- Source File -->
 		<require-file name="Sources/Subs-RemoveLastEditMod.php" destination="$sourcedir" />
 		<!-- Hooks -->
@@ -24,7 +23,7 @@
 		<hook hook="integrate_load_permissions" function="rlem_permissions" file="$sourcedir/Subs-RemoveLastEditMod.php" />
 		<hook hook="integrate_prepare_display_context" function="rlem_display_context" file="$sourcedir/Subs-RemoveLastEditMod.php" />
 	</install>
-	<uninstall for="2.1.0 - 2.1.99">
+	<uninstall for="2.1 - 2.1.99">
 		<!-- Hooks -->
 		<hook hook="integrate_actions" function="rlem_actions" file="$sourcedir/Subs-RemoveLastEditMod.php" reverse="true" />
 		<hook hook="integrate_load_permissions" function="rlem_permissions" file="$sourcedir/Subs-RemoveLastEditMod.php" reverse="true" />
