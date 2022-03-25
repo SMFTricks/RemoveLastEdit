@@ -2,7 +2,7 @@
 
 /**
  * @package Remove Last Edit
- * @version 1.0
+ * @version 1.1
  * @author Diego Andrés <diegoandres_cortes@outlook.com>
  * @copyright Copyright (c) 2022, SMF Tricks
  * @license https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -46,6 +46,15 @@ function rlem_permissions(&$permissionGroups, &$permissionList)
 	// Add them.
 	foreach ($permissions as $perm)
 		$permissionList['membergroup'][$perm] = array(false, 'rlem_classic', 'rlem_simple');
+}
+
+// Don't add these permissions for guests
+function rlem_guest_illegal()
+{
+	global $context;
+
+	$context['non_guest_permissions'][] = 'rlem_do_own';
+	$context['non_guest_permissions'][] = 'rlem_do_any';
 }
 
 // Just positions as a bridge between rlem_do and the topic view. Nothing more really.

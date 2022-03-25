@@ -1,5 +1,8 @@
 # Changelog
 
+#### 1.1 - 25 March 2022
+- ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Remove ability to grant mod permission to guests.
+---
 #### 1.0 - 06 March 2022
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Hooks only.
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Small code improvements.
