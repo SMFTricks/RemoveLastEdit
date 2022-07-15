@@ -25,7 +25,9 @@ Original Developer: [url="https://www.simplemachines.org/community/index.php?act
 [img]https://www.simplemachines.org/site_images/lang/serbian.gif[/img] Serbian [size=1](CYRILLIC and LATIN)[/size] by [url="https://www.simplemachines.org/community/index.php?action=profile;u=95212"]Branko.[/url]
 [img]https://www.simplemachines.org/site_images/lang/french.gif[/img] French by [url="https://www.simplemachines.org/community/index.php?action=profile;u=363570"]alexetgus[/url]
 [img]https://www.simplemachines.org/site_images/lang/dutch.gif[/img] Dutch by [url="https://www.simplemachines.org/community/index.php?action=profile;u=251953"]NanoSector[/url]
+[img]https://www.simplemachines.org/site_images/lang/spanish.gif[/img] Spanish
+
 [hr]
 
-[size=3][url="https://github.com/SMFTricks/RemoveLastEditMod/blob/master/CHANGELOG.md"][color=#cc5d31]Changelog[/color][/url][/size]
-[size=3][url="https://github.com/SMFTricks/RemoveLastEditMod"][color=#5e2b82]GitHub[/color][/url][/size]
+[size=3][url="https://github.com/SMFTricks/RemoveLastEdit/blob/master/CHANGELOG.md"][color=#cc5d31]Changelog[/color][/url][/size]
+[size=3][url="https://github.com/SMFTricks/RemoveLastEdit"][color=#5e2b82]GitHub[/color][/url][/size]

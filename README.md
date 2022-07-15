@@ -21,6 +21,8 @@ Remove Last Edit allows users to easily remove the "Last edit by" signs, with th
 - ![Serbian](https://www.simplemachines.org/site_images/lang/serbian.gif) Serbian by [Branko.](https://www.simplemachines.org/community/index.php?action=profile;u=95212)
 - ![Dutch](https://www.simplemachines.org/site_images/lang/dutch.gif) Dutch by [NanoSector](https://www.simplemachines.org/community/index.php?action=profile;u=251953)
 - ![French](https://www.simplemachines.org/site_images/lang/french.gif) French by [alexetgus](https://www.simplemachines.org/community/index.php?action=profile;u=363570)
+- ![Spanish](https://www.simplemachines.org/site_images/lang/spanish.gif) Spanish
+
 ---
-### [Changelog](https://github.com/SMFTricks/RemoveLastEditMod/blob/master/CHANGELOG.md)
-### [GitHub](https://github.com/SMFTricks/RemoveLastEditMod)
+### [Changelog](https://github.com/SMFTricks/RemoveLastEdit/blob/master/CHANGELOG.md)
+### [GitHub](https://github.com/SMFTricks/RemoveLastEdit)
