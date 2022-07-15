@@ -42,18 +42,18 @@ class RemoveLastEdit
 	 * 
 	 * @return void
 	 */
-	public static function permissions(&$permissionGroups, &$permissionList) : void
+	public static function permissions(&$permissionGroups, &$permissionList, &$leftPermissionGroups, &$hiddenPermissions) : void
 	{
 		global $modSettings;
-
-		// Is the last edit message enabled?
-		if (empty($modSettings['show_modify']))
-			return;
 
 		self::language();
 
 		// Add the permission
 		$permissionList['membergroup']['rlem_do'] = array(true, 'post');
+
+		// Hide them when the feature is disabled
+		if (empty($modSettings['show_modify']))
+			$hiddenPermissions[] = 'rlem_do';
 	}
 
 	/**
