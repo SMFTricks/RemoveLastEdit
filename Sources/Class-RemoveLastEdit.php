@@ -49,7 +49,7 @@ class RemoveLastEdit
 		self::language();
 
 		// Add the permission
-		$permissionList['membergroup']['rlem_do'] = array(true, 'post');
+		$permissionList['membergroup']['rlem_do'] = array(true, 'general');
 
 		// Hide them when the feature is disabled
 		if (empty($modSettings['show_modify']))
