@@ -1,6 +1,6 @@
 # Changelog
 
-#### 1.2 - 15 July 2022
+#### 1.2 - 17 July 2022
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Minor code improvements.
 ---
 #### 1.1 - 25 March 2022
