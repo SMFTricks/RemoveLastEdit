@@ -1,5 +1,9 @@
 # Changelog
 
+#### 1.2.1 - 24 July 2024
+- ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Code improvements.
+- ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Small tweaks for the package.
+
 #### 1.2 - 17 July 2022
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Minor code improvements.
 ---
