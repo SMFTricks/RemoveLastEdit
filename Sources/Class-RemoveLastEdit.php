@@ -12,10 +12,9 @@ class RemoveLastEdit
 {
 	/**
 	 * Add the action to the actions array
-	 * @param array $actions
-	 * @return void
+	 * @param array $actions The list of actions
 	 */
-	public static function actions(&$actions) : void
+	public function actions(&$actions) : void
 	{
 		global $modSettings;
 
@@ -24,15 +23,13 @@ class RemoveLastEdit
 			return;
 
 		// Our main action, on which everything will be based.
-		$actions['unsetedittime'] = array('Class-RemoveLastEdit.php', __CLASS__ . '::rlem');
+		$actions['unsetedittime'] = ['Class-RemoveLastEdit.php', [$this, 'rlem']];
 	}
 
 	/**
 	 * Load the language file
-	 * 
-	 * @return void
 	 */
-	public static function language() : void
+	public function language() : void
 	{
 		loadLanguage('RemoveLastEdit/');
 	}
@@ -40,16 +37,17 @@ class RemoveLastEdit
 	/**
 	 * Add the permissions
 	 * 
-	 * @return void
+	 * @param array $permissionList The list of permissions
+	 * @param array $hiddenPermissions The list of hidden permissions
 	 */
-	public static function permissions(&$permissionGroups, &$permissionList, &$leftPermissionGroups, &$hiddenPermissions) : void
+	public function permissions(&$permissionGroups, &$permissionList, &$leftPermissionGroups, &$hiddenPermissions) : void
 	{
 		global $modSettings;
 
-		self::language();
+		$this->language();
 
 		// Add the permission
-		$permissionList['membergroup']['rlem_do'] = array(true, 'general');
+		$permissionList['membergroup']['rlem_do'] = [true, 'general'];
 
 		// Hide them when the feature is disabled
 		if (empty($modSettings['show_modify']))
@@ -58,10 +56,8 @@ class RemoveLastEdit
 
 	/**
 	 * Illegal permissions to guests
-	 * 
-	 * @return void
 	 */
-	public static function guest_illegal() : void
+	public function guest_illegal() : void
 	{
 		global $context;
 
@@ -72,9 +68,9 @@ class RemoveLastEdit
 	 * Adds the "remove sign" button if they have enough permissions.
 	 * 
 	 * @param array $output The post output
-	 * @return void
+	 * @param array $message The post data
 	 */
-	public static function display_context(&$output, $message) : void
+	public function display_context(&$output, $message) : void
 	{
 		global $user_info, $scripturl, $txt;
 
@@ -83,7 +79,7 @@ class RemoveLastEdit
 			return;
 
 		// Load the language for the actual message...
-		self::language();
+		$this->language();
 
 		// Add the link, if possible...
 		if (isset($output['modified']['last_edit_text']) && !empty($output['modified']['last_edit_text']))
@@ -92,15 +88,13 @@ class RemoveLastEdit
 
 	/**
 	 * Do the actual removal of the edit sign and verification
-	 * 
-	 * @return void
 	 */
-	public static function rlem() : void
+	public function rlem() : void
 	{
 		global $user_info, $scripturl, $smcFunc, $user_info;
 
 		// Language
-		self::language();
+		$this->language();
 
 		// Check if everything is set.
 		if (empty($_REQUEST['msg']) || !isset($_REQUEST['msg']))
@@ -118,12 +112,12 @@ class RemoveLastEdit
 				modified_name = {string:modified_name}
 			WHERE id_msg = {int:msgid}' . (allowedTo('rlem_do_own') && !allowedTo('rlem_do_any') ? '
 				AND id_member = {int:userid}' : ''),
-			array(
+			[
 				'modified_time' => 0,
 				'modified_name' => '',
 				'msgid' => (int) $_REQUEST['msg'],
 				'userid' => $user_info['id'],
-			)
+			]
 		);
 
 		// And we're done!
