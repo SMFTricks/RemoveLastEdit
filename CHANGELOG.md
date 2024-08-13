@@ -1,5 +1,8 @@
 # Changelog
 
+#### 1.3 - 12 August 2024
+- ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Now using board permissions instead of general permissions.
+---
 #### 1.2.1 - 24 July 2024
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Code improvements.
 - ![Improvement](https://smftricks.com/assets/changelog/tag--pencil.png) Small tweaks for the package.
