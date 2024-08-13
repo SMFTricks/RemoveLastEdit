@@ -47,11 +47,12 @@ class RemoveLastEdit
 		$this->language();
 
 		// Add the permission
-		$permissionList['membergroup']['rlem_do'] = [true, 'general'];
+		$permissionList['board']['rlem_do'] = [true, 'post'];
 
 		// Hide them when the feature is disabled
-		if (empty($modSettings['show_modify']))
+		if (empty($modSettings['show_modify'])) {
 			$hiddenPermissions[] = 'rlem_do';
+		}
 	}
 
 	/**
@@ -72,7 +73,7 @@ class RemoveLastEdit
 	 */
 	public function display_context(&$output, $message) : void
 	{
-		global $user_info, $scripturl, $txt;
+		global $user_info, $scripturl, $txt, $board;
 
 		// Check if there's anything to do here
 		if (!allowedTo('rlem_do_any') && !allowedTo('rlem_do_own') || $message['id_member'] != $user_info['id'] && !allowedTo('rlem_do_any'))
@@ -83,7 +84,7 @@ class RemoveLastEdit
 
 		// Add the link, if possible...
 		if (isset($output['modified']['last_edit_text']) && !empty($output['modified']['last_edit_text']))
-			$output['modified']['last_edit_text'] .= ' - <a href="' . $scripturl . '?action=unsetedittime;msg=' . $message['id_msg'] . '">' . $txt['remove_edit_sign'] . '</a>';
+			$output['modified']['last_edit_text'] .= ' - <a href="' . $scripturl . '?action=unsetedittime;msg=' . $message['id_msg'] . ';board=' . $board . '">' . $txt['remove_edit_sign'] . '</a>';
 	}
 
 	/**
@@ -101,8 +102,9 @@ class RemoveLastEdit
 			fatal_lang_error('no_posts_selected', false);
 
 		// Need either permission...
-		if (!allowedTo('rlem_do_any'))
+		if (!allowedTo('rlem_do_any')) {
 			isAllowedTo('rlem_do_own');
+		}
 
 		// This empties out the parts with which SMF determines if the post was modified, thus tricking it into believing it's not modified at all.
 		$smcFunc['db_query']('', '
